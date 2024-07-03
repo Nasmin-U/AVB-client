@@ -2,7 +2,6 @@ import { Link, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import ToggleBtn from "./ToggleBtn";
-import "./css/Header.css";
 
 const Header = ({ isLoggedIn, setIsLoggedIn }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -35,52 +34,91 @@ const Header = ({ isLoggedIn, setIsLoggedIn }) => {
   };
 
   return (
-    <nav className="navbar">
-      <div className="navbar-container ">
-        <Link to="/" className="navbar-brand flex">
-          <img src="/logo.svg" alt="logo" className="max-w-7 mr-2" />
-          Arabic Vocabulary Builder
+    <nav
+      className="shadow-md p-4 relative z-10"
+      style={{ backgroundColor: "var(--primary-color)" }}
+    >
+      <div className="max-w-6xl mx-auto flex justify-between items-center">
+        <Link to="/" className="text-white text-xl font-bold flex items-center">
+          <img src="/logo.svg" alt="logo" className="w-8 h-8 mr-2" />
+          <span className="hidden sm:inline">Arabic Vocabulary Builder</span>
         </Link>
         <div className="flex items-center">
-          <div className={`navbar-links ${isMenuOpen ? "active" : ""}`}>
-            <Link to="/" className="navbar-link" onClick={toggleMenu}>
+          <div
+            className={`flex-col sm:flex-row ${
+              isMenuOpen ? "flex" : "hidden"
+            } sm:flex items-center absolute sm:relative top-14 sm:top-0 left-0 w-full sm:w-auto bg-primary sm:bg-transparent p-4 sm:p-0`}
+          >
+            <Link
+              to="/"
+              className="text-white px-2 py-1 hover:text-lightGrey"
+              onClick={toggleMenu}
+            >
               Home
             </Link>
             {isLoggedIn && (
-              <Link to="/my-words" className="navbar-link" onClick={toggleMenu}>
+              <Link
+                to="/my-words"
+                className="text-white px-2 py-1 hover:text-lightGrey"
+                onClick={toggleMenu}
+              >
                 My Words
               </Link>
             )}
-            <Link to="/test-me" className="navbar-link" onClick={toggleMenu}>
+            <Link
+              to="/test-me"
+              className="text-white px-2 py-1 hover:text-lightGrey"
+              onClick={toggleMenu}
+            >
               Test Me
             </Link>
             {isLoggedIn ? (
-              <button onClick={handleLogout} className="navbar-button">
+              <button
+                onClick={handleLogout}
+                className="text-white px-2 py-1 hover:text-lightGrey"
+              >
                 Logout
               </button>
             ) : (
               <>
-                <Link to="/login" className="navbar-link" onClick={toggleMenu}>
+                <Link
+                  to="/login"
+                  className="text-white px-2 py-1 hover:text-lightGrey"
+                  onClick={toggleMenu}
+                >
                   Login
                 </Link>
-                <Link to="/signup" className="navbar-link" onClick={toggleMenu}>
+                <Link
+                  to="/signup"
+                  className="text-white px-2 py-1 hover:text-lightGrey"
+                  onClick={toggleMenu}
+                >
                   Signup
                 </Link>
               </>
             )}
           </div>
-          <div className="flex items-center">
+          <div
+            className="sm:hidden flex flex-col justify-between items-center h-6 w-6 ml-4 cursor-pointer"
+            onClick={toggleMenu}
+          >
             <div
-              className="hamburger"
-              onClick={toggleMenu}
-              aria-label="Toggle menu"
-            >
-              <div className={`line ${isMenuOpen ? "open" : ""}`}></div>
-              <div className={`line ${isMenuOpen ? "open" : ""}`}></div>
-              <div className={`line ${isMenuOpen ? "open" : ""}`}></div>
-            </div>
-            <ToggleBtn className="toggle-btn" />
+              className={`h-0.5 w-full bg-white transition-transform duration-300 ${
+                isMenuOpen ? "transform rotate-45 translate-y-2" : ""
+              }`}
+            ></div>
+            <div
+              className={`h-0.5 w-full bg-white transition-opacity duration-300 ${
+                isMenuOpen ? "opacity-0" : "opacity-100"
+              }`}
+            ></div>
+            <div
+              className={`h-0.5 w-full bg-white transition-transform duration-300 ${
+                isMenuOpen ? "transform -rotate-45 -translate-y-2" : ""
+              }`}
+            ></div>
           </div>
+          <ToggleBtn className="ml-4" />
         </div>
       </div>
     </nav>

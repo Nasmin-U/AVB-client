@@ -1,5 +1,4 @@
 import PropTypes from "prop-types";
-import "./css/ArabicKeyboard.css";
 
 const ArabicKeyboard = ({ onKeyPress }) => {
   const arabicLetters = [
@@ -34,25 +33,25 @@ const ArabicKeyboard = ({ onKeyPress }) => {
   ];
 
   return (
-    <div className="arabic-keyboard">
+    <div className="flex flex-wrap justify-center mt-2">
       {arabicLetters.map((letter) => (
         <button
           key={letter}
           onMouseDown={(e) => {
-            e.preventDefault(); 
+            e.preventDefault();
             onKeyPress(letter);
           }}
-          className="arabic-key"
+          className="p-3 m-1 text-lg sm:p-4 sm:m-2 sm:text-xl border border-primary rounded bg-lightWhite text-darkPurple hover:bg-primary hover:text-lightWhite transition-colors duration-300"
         >
           {letter}
         </button>
       ))}
       <button
         onMouseDown={(e) => {
-          e.preventDefault(); 
+          e.preventDefault();
           onKeyPress("delete");
         }}
-        className="arabic-key delete-key"
+        className="p-3 m-1 text-lg sm:p-4 sm:m-2 sm:text-xl border border-primary rounded bg-lightWhite text-darkPurple hover:bg-primary hover:text-lightWhite transition-colors duration-300"
       >
         ⌫
       </button>

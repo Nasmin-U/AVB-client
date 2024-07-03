@@ -1,17 +1,16 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import PropTypes from "prop-types"; 
+import PropTypes from "prop-types";
 import { getWordDetails, saveWord } from "../services/api.service";
 import Modal from "../components/Modal";
 import Button from "../components/Button";
 import { AiOutlinePlus } from "react-icons/ai";
-import "./css/WordPage.css";
 
 const WordPage = ({ setWords }) => {
   const { word } = useParams();
   const [wordData, setWordData] = useState(null);
   const [errorMessage, setErrorMessage] = useState("");
-  const [successMessage, setSuccessMessage] = useState(""); 
+  const [successMessage, setSuccessMessage] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
   const navigate = useNavigate();
 
@@ -41,20 +40,19 @@ const WordPage = ({ setWords }) => {
       });
       setSuccessMessage("Word added to your saved words!");
       setErrorMessage("");
-      
- setTimeout(() => setSuccessMessage(""), 3000);
 
-    
+      setTimeout(() => setSuccessMessage(""), 3000);
+
       setWords((prevWords) => [...prevWords, savedWord]);
     } catch (error) {
       setSuccessMessage("");
       setErrorMessage("An error occurred while saving the word.");
-       setTimeout(() => setErrorMessage(""), 3000);
+      setTimeout(() => setErrorMessage(""), 3000);
     }
   };
 
   if (errorMessage) {
-    return <p className="error-message">{errorMessage}</p>;
+    return <p className="text-red-600">{errorMessage}</p>;
   }
 
   if (!wordData) {
@@ -62,9 +60,11 @@ const WordPage = ({ setWords }) => {
   }
 
   return (
-    <div className="word-page-container max-w-4xl mx-auto p-6 bg-lightWhite rounded-lg shadow-md">
-      <div className="flex justify-between items-center">
-        <h1 className="text-3xl font-bold mb-4">{wordData.word}</h1>
+    <div className="max-w-4xl mx-auto p-6 bg-lightWhite rounded-lg shadow-md">
+      <div className="flex flex-col sm:flex-row justify-between items-center mb-4">
+        <h1 className="text-2xl sm:text-3xl font-bold mb-4 sm:mb-0">
+          {wordData.word}
+        </h1>
         <button
           onClick={handleAddToMyWords}
           className="flex items-center text-white bg-primary hover:bg-darkPurple font-bold py-2 px-4 rounded"
@@ -72,13 +72,19 @@ const WordPage = ({ setWords }) => {
           <AiOutlinePlus className="mr-2" /> Add to My Words
         </button>
       </div>
-      <p className="text-xl mb-2">Translation: {wordData.translation}</p>
-      <p className="text-xl mb-2">Pronunciation: {wordData.pronunciation}</p>
-      <audio controls className="mb-4">
+      <p className="text-lg sm:text-xl mb-2">
+        Translation: {wordData.translation}
+      </p>
+      <p className="text-lg sm:text-xl mb-2">
+        Pronunciation: {wordData.pronunciation}
+      </p>
+      <audio controls className="mb-4 w-full sm:w-64">
+        {" "}
+        {/* Adjusted width for audio */}
         <source src={wordData.audioFile} type="audio/mpeg" />
         Your browser does not support the audio element.
       </audio>
-      <p className="text-xl mb-4">Root: {wordData.root || "N/A"}</p>
+      <p className="text-lg sm:text-xl mb-4">Root: {wordData.root || "N/A"}</p>
       <div
         className="mb-4"
         dangerouslySetInnerHTML={{ __html: wordData.definitionHTML }}
@@ -95,10 +101,10 @@ const WordPage = ({ setWords }) => {
         <p className="text-green-600 mt-4">{successMessage}</p>
       )}
       {errorMessage && <p className="text-red-600 mt-4">{errorMessage}</p>}
-     
+
       <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
         <p>You need to be logged in to save words. Please log in or sign up.</p>
-        
+
         <Button
           onClick={() =>
             navigate(`/login?redirect=${encodeURIComponent(`/word/${word}`)}`)
@@ -106,7 +112,7 @@ const WordPage = ({ setWords }) => {
         >
           Login
         </Button>
-        
+
         <Button
           onClick={() =>
             navigate(`/signup?redirect=${encodeURIComponent(`/word/${word}`)}`)

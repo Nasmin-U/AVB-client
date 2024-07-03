@@ -22,7 +22,7 @@ const App = () => {
     <Router>
       <div className="flex flex-col min-h-screen">
         <Header isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
-        <div className="container mx-auto p-4 ">
+        <div className="flex-grow container mx-auto p-4 overflow-y-auto">
           <Routes>
             <Route
               path="/signup"

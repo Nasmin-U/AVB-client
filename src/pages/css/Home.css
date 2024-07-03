@@ -7,14 +7,20 @@
   padding: 20px;
   border-radius: 0.5rem;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  
 }
 
 .title {
-  font-size: 2.5rem;
+  font-size: 2rem; 
   color: #9067c6;
   margin-bottom: 20px;
   text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+
+@media (min-width: 640px) {
+  .title {
+    font-size: 2.5rem; 
+  }
 }
 
 .search-bar-container {
@@ -52,6 +58,7 @@
 .error-message {
   color: red;
   margin-top: 10px;
+  margin-bottom: 10px; 
 }
 
 .arabic-keyboard {
@@ -85,4 +92,38 @@
 .delete-key:hover {
   background-color: #ff0000;
   color: #ffffff;
+}
+
+.loading-dots {
+  display: inline-block;
+}
+
+.loading-dots span {
+  animation: loading-dots 1s infinite;
+  font-size: 1.5em;
+  line-height: 0;
+}
+
+.loading-dots span:nth-child(1) {
+  animation-delay: 0s;
+}
+
+.loading-dots span:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.loading-dots span:nth-child(3) {
+  animation-delay: 0.4s;
+}
+
+@keyframes loading-dots {
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
 }

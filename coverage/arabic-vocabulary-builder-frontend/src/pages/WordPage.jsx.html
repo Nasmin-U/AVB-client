@@ -23,9 +23,9 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">96.82% </span>
+                <span class="strong">96.96% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>122/126</span>
+                <span class='fraction'>128/132</span>
             </div>
         
             
@@ -44,9 +44,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">96.82% </span>
+                <span class="strong">96.96% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>122/126</span>
+                <span class='fraction'>128/132</span>
             </div>
         
             
@@ -189,8 +189,13 @@
 <a name='L124'></a><a href='#L124'>124</a>
 <a name='L125'></a><a href='#L125'>125</a>
 <a name='L126'></a><a href='#L126'>126</a>
-<a name='L127'></a><a href='#L127'>127</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
+<a name='L127'></a><a href='#L127'>127</a>
+<a name='L128'></a><a href='#L128'>128</a>
+<a name='L129'></a><a href='#L129'>129</a>
+<a name='L130'></a><a href='#L130'>130</a>
+<a name='L131'></a><a href='#L131'>131</a>
+<a name='L132'></a><a href='#L132'>132</a>
+<a name='L133'></a><a href='#L133'>133</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
@@ -236,7 +241,6 @@
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -251,6 +255,14 @@
 <span class="cline-any cline-yes">17x</span>
 <span class="cline-any cline-yes">7x</span>
 <span class="cline-any cline-yes">7x</span>
+<span class="cline-any cline-yes">9x</span>
+<span class="cline-any cline-yes">9x</span>
+<span class="cline-any cline-yes">9x</span>
+<span class="cline-any cline-yes">9x</span>
+<span class="cline-any cline-yes">9x</span>
+<span class="cline-any cline-yes">9x</span>
+<span class="cline-any cline-yes">9x</span>
+<span class="cline-any cline-yes">9x</span>
 <span class="cline-any cline-yes">9x</span>
 <span class="cline-any cline-yes">9x</span>
 <span class="cline-any cline-yes">9x</span>
@@ -317,18 +329,17 @@
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import PropTypes from "prop-types"; 
+import PropTypes from "prop-types";
 import { getWordDetails, saveWord } from "../services/api.service";
 import Modal from "../components/Modal";
 import Button from "../components/Button";
 import { AiOutlinePlus } from "react-icons/ai";
-import "./css/WordPage.css";
 &nbsp;
 const WordPage = ({ setWords }) =&gt; {
   const { word } = useParams();
   const [wordData, setWordData] = useState(null);
   const [errorMessage, setErrorMessage] = useState("");
-  const [successMessage, setSuccessMessage] = useState(""); 
+  const [successMessage, setSuccessMessage] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
   const navigate = useNavigate();
 &nbsp;
@@ -358,20 +369,19 @@ const WordPage = ({ setWords }) =&gt; {
       });
       setSuccessMessage("Word added to your saved words!");
       setErrorMessage("");
-      
- setTimeout(() =&gt; setSuccessMessage(""), 3000);
 &nbsp;
-    
+      setTimeout(() =&gt; setSuccessMessage(""), 3000);
+&nbsp;
       setWords((prevWords) =&gt; [...prevWords, savedWord]);
 <span class="branch-0 cbranch-no" title="branch not covered" >    } catch (error) {</span>
 <span class="cstat-no" title="statement not covered" >      setSuccessMessage("");</span>
 <span class="cstat-no" title="statement not covered" >      setErrorMessage("An error occurred while saving the word.");</span>
-<span class="cstat-no" title="statement not covered" >       setTimeout(() =&gt; setErrorMessage(""), 3000);</span>
+<span class="cstat-no" title="statement not covered" >      setTimeout(() =&gt; setErrorMessage(""), 3000);</span>
 <span class="cstat-no" title="statement not covered" >    }</span>
   };
 &nbsp;
   if (errorMessage) {
-    return &lt;p className="error-message"&gt;{errorMessage}&lt;/p&gt;;
+    return &lt;p className="text-red-600"&gt;{errorMessage}&lt;/p&gt;;
   }
 &nbsp;
   if (!wordData) {
@@ -379,9 +389,11 @@ const WordPage = ({ setWords }) =&gt; {
   }
 &nbsp;
   return (
-    &lt;div className="word-page-container max-w-4xl mx-auto p-6 bg-lightWhite rounded-lg shadow-md"&gt;
-      &lt;div className="flex justify-between items-center"&gt;
-        &lt;h1 className="text-3xl font-bold mb-4"&gt;{wordData.word}&lt;/h1&gt;
+    &lt;div className="max-w-4xl mx-auto p-6 bg-lightWhite rounded-lg shadow-md"&gt;
+      &lt;div className="flex flex-col sm:flex-row justify-between items-center mb-4"&gt;
+        &lt;h1 className="text-2xl sm:text-3xl font-bold mb-4 sm:mb-0"&gt;
+          {wordData.word}
+        &lt;/h1&gt;
         &lt;button
           onClick={handleAddToMyWords}
           className="flex items-center text-white bg-primary hover:bg-darkPurple font-bold py-2 px-4 rounded"
@@ -389,13 +401,19 @@ const WordPage = ({ setWords }) =&gt; {
           &lt;AiOutlinePlus className="mr-2" /&gt; Add to My Words
         &lt;/button&gt;
       &lt;/div&gt;
-      &lt;p className="text-xl mb-2"&gt;Translation: {wordData.translation}&lt;/p&gt;
-      &lt;p className="text-xl mb-2"&gt;Pronunciation: {wordData.pronunciation}&lt;/p&gt;
-      &lt;audio controls className="mb-4"&gt;
+      &lt;p className="text-lg sm:text-xl mb-2"&gt;
+        Translation: {wordData.translation}
+      &lt;/p&gt;
+      &lt;p className="text-lg sm:text-xl mb-2"&gt;
+        Pronunciation: {wordData.pronunciation}
+      &lt;/p&gt;
+      &lt;audio controls className="mb-4 w-full sm:w-64"&gt;
+        {" "}
+        {/* Adjusted width for audio */}
         &lt;source src={wordData.audioFile} type="audio/mpeg" /&gt;
         Your browser does not support the audio element.
       &lt;/audio&gt;
-      &lt;p className="text-xl mb-4"&gt;Root: {wordData.<span class="branch-0 cbranch-no" title="branch not covered" >root || "N/A"}&lt;</span>/p&gt;
+      &lt;p className="text-lg sm:text-xl mb-4"&gt;Root: {wordData.<span class="branch-0 cbranch-no" title="branch not covered" >root || "N/A"}&lt;</span>/p&gt;
       &lt;div
         className="mb-4"
         dangerouslySetInnerHTML={{ __html: wordData.definitionHTML }}
@@ -412,10 +430,10 @@ const WordPage = ({ setWords }) =&gt; {
         &lt;p className="text-green-600 mt-4"&gt;{successMessage}&lt;/p&gt;
       )}
       {<span class="branch-0 cbranch-no" title="branch not covered" >errorMessage &amp;&amp; &lt;p className="text-red-600 mt-4"&gt;{errorMessage}&lt;/p&gt;}</span>
-     
+&nbsp;
       &lt;Modal isOpen={isModalOpen} onClose={<span class="fstat-no" title="function not covered" >() =&gt; setIsModalOpen(false)}&gt;</span>
         &lt;p&gt;You need to be logged in to save words. Please log in or sign up.&lt;/p&gt;
-        
+&nbsp;
         &lt;Button
           onClick={() =&gt;
             navigate(`/login?redirect=${encodeURIComponent(`/word/${word}`)}`)
@@ -423,7 +441,7 @@ const WordPage = ({ setWords }) =&gt; {
         &gt;
           Login
         &lt;/Button&gt;
-        
+&nbsp;
         &lt;Button
           onClick={() =&gt;
             navigate(`/signup?redirect=${encodeURIComponent(`/word/${word}`)}`)
@@ -448,7 +466,7 @@ export default WordPage;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2024-07-03T17:10:10.170Z
+                at 2024-07-03T21:11:41.117Z
             </div>
         <script src="../../../prettify.js"></script>
         <script>

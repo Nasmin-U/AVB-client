@@ -9,18 +9,23 @@ const Home = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [showKeyboard, setShowKeyboard] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const inputRef = useRef(null);
 
   const handleSearch = async () => {
+    setLoading(true);
+    setErrorMessage("");
     try {
       const wordData = await searchWord(searchTerm);
+      setLoading(false);
       if (wordData) {
         navigate(`/word/${searchTerm}`);
       } else {
         setErrorMessage("Word not found in the database.");
       }
     } catch (error) {
+      setLoading(false);
       setErrorMessage("An error occurred while searching for the word.");
     }
   };
@@ -37,18 +42,23 @@ const Home = () => {
       setSearchTerm((prev) => prev + letter);
     }
   };
+
   const handleFocus = () => {
     setShowKeyboard(true);
   };
 
   const handleBlur = (e) => {
-    if (!e.relatedTarget || !e.relatedTarget.classList.contains("arabic-key")) {
+    if (
+      !e.relatedTarget ||
+      (!e.relatedTarget.classList.contains("arabic-key") &&
+        !e.relatedTarget.classList.contains("search-button"))
+    ) {
       setShowKeyboard(false);
     }
   };
 
   return (
-    <div className="home-container">
+    <div className="home-container sm: pt-20 pb-20">
       <h1 className="title">Arabic Vocabulary Builder</h1>
       <div className="search-bar-container">
         <input
@@ -61,12 +71,25 @@ const Home = () => {
           placeholder="Search for a word in Arabic or English..."
           className="search-bar"
         />
-        <Button onClick={handleSearch} className="search-button">
-          Search
+        <Button
+          onMouseDown={(e) => e.preventDefault()}
+          onClick={handleSearch}
+          className="search-button"
+          disabled={loading}
+        >
+          {loading ? (
+            <div className="loading-dots">
+              <span>.</span>
+              <span>.</span>
+              <span>.</span>
+            </div>
+          ) : (
+            "Search"
+          )}
         </Button>
       </div>
-      {showKeyboard && <ArabicKeyboard onKeyPress={handleArabicKeyPress} />}
       {errorMessage && <p className="error-message">{errorMessage}</p>}
+      {showKeyboard && <ArabicKeyboard onKeyPress={handleArabicKeyPress} />}
     </div>
   );
 };
