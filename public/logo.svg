@@ -1,0 +1,39 @@
+<svg
+  width="200"
+  height="200"
+  viewBox="0 0 200 200"
+  fill="none"
+  xmlns="http://www.w3.org/2000/svg"
+>
+  <!-- Background Circle -->
+  <circle cx="100" cy="100" r="95" stroke="#007bff" stroke-width="10" fill="#e6f2ff" />
+
+  <!-- Letter A -->
+  <path
+    d="M 50 140 L 75 60 L 100 140 Z"
+    fill="#007bff"
+    stroke="#0056b3"
+    stroke-width="3"
+  />
+  <line x1="62.5" y1="100" x2="87.5" y2="100" stroke="#0056b3" stroke-width="3" />
+
+  <!-- Letter V -->
+  <path
+    d="M 100 60 L 115 140 L 130 60"
+    fill="none"
+    stroke="#007bff"
+    stroke-width="10"
+    stroke-linecap="round"
+  />
+
+  <!-- Letter B -->
+  <circle cx="150" cy="90" r="15" fill="#007bff" stroke="#0056b3" stroke-width="3" />
+  <circle cx="150" cy="120" r="15" fill="#007bff" stroke="#0056b3" stroke-width="3" />
+  <path
+    d="M 135 60 L 135 140"
+    stroke="#0056b3"
+    stroke-width="10"
+    stroke-linecap="round"
+  />
+
+</svg>

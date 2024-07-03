@@ -1,0 +1,30 @@
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
+
+:root {
+  --primary-color: #9067C6;
+  --light-grey: #ECECEC;
+  --light-white: #FAFFFD;
+  --dark-purple: #48157F;
+}
+
+[data-theme='dark'] {
+  --primary-color: #48157F;
+  --light-grey: #FAFFFD;
+  --light-white: #ECECEC;
+  --dark-purple: #9067C6;
+  --bg-color: #69498b;
+}
+
+
+body {
+  font-family: 'Roboto', sans-serif;
+  background-color: var(--light-grey);
+  color: var(--dark-purple);
+}
+[data-theme='dark'] body {
+  background-color: var(--bg-color);
+  color: var(--dark-purple);
+}
